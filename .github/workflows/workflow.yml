@@ -1,0 +1,129 @@
+name: Django CI & Postgres Test
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    
+jobs:
+  # setup:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./
+  #   env:
+  #     DEBUG: 0
+  #     WOKEEPOCH: '1577840400000'
+  #     DJANGO_SETTINGS_MODULE: app.settings
+  #     POSTGRES_ENGINE: django.db.backends.postgresql_psycopg2
+  #     DJANGO_ALLOWED_HOSTS: 'localhost 127.0.0.1 wokenmeme.com m.wokenmeme.com api.wokenmeme.com'
+  #     POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+  #     POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+  #     POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  #     POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+  #     POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+  #     DB_IGNORE_SSL: "true"
+  #     SECRET_KEY: 'testkay'
+  #   strategy:
+  #     max-parallel: 4
+  #     matrix:
+  #       python-version: [3.9]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up Python ${{ matrix.python-version }}
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: ${{ matrix.python-version }}
+  #     - name: Install Dependencies
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         pip install -r requirements.txt
+  #     # - name: Run Tests
+  #       # run: |
+  #       #   python manage.py test
+
+  build:
+    # needs: setup
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      # - name: Docker Lint
+      #   working-directory: ${{ github.workspace }}  
+      #   run: ls -la
+      # - name: Build container image
+      #   run: docker build -t registry.digitalocean.com/wokenmeme-containers/api_image:$(echo $GITHUB_SHA | head -c7) .
+
+      # - name: DigitalOcean Docker Image Publish
+      #   uses: ripplr-io/docr-docker-publish@v1
+      #   with:
+      #     # Image path in the format registry-name/image-name
+      #     image_path: wokenmeme-containers/api_image
+      #     # Number of characters from the commit SHA
+      #     sha_size: 8
+      #     # The path + name of the Dockerfile you want to build (-f flag)
+      #     dockerfile: .
+      #     # The docker build context (usually '.')
+      #     docker_build_context: 
+      - name: Build container image
+        run: |
+          docker build \
+            -t api_image:latest \
+            -t api_image:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
+            .
+      - name: list images
+        run: docker images
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: elijah999mgenezis/portfolio:latest
+      - name: Insall doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN_KEY }}
+
+      - name: K8s cluster kubeconfig file with/ short-lived creds
+        run: |
+          doctl kubernetes cluster kubeconfig save --expiry-seconds 600 internalt
+          
+      - name: Update Deployment image - portfolio 
+        run: |
+          kubectl set image deployment/wokenmeme-portfolio portfolio=elijah999mgenezis/portfolio:latest
+      
+      - name: Wait for rollout to finish - portfolio 
+        run: |
+          kubectl rollout status deployment/wokenmeme-portfolio
+
+  # pull-request:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: pull-request
+  #     uses: repo-sync/pull-request@v2
+  #     with:
+  #       source_branch: ""                                 # If blank, default: triggered branch
+  #       destination_branch: "deploy"                      # If blank, default: master
+  #       pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
+  #       pr_body: ":crown: *An automated PR*"              # Full markdown support, requires pr_title to be set
+  #       pr_template: ".github/ISSUE_TEMPLATE/feature_request.md"   # Path to pull request template, requires pr_title to be set, excludes pr_body
+  #       pr_reviewer: "wei,worker"                         # Comma-separated list (no spaces)
+  #       pr_assignee: "wei,worker"                         # Comma-separated list (no spaces)
+  #       pr_label: "auto-pr"                               # Comma-separated list (no spaces)
+  #       pr_milestone: "Milestone 1"                       # Milestone name
+  #       pr_draft: true                                    # Creates pull request as draft
+  #       pr_allow_empty: true                              # Creates pull request even if there are no changes
+  #       github_token: ${{ secrets.GITHUB_TOKEN }}
