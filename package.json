@@ -1,11 +1,12 @@
 {
+  "homepage": "https://elijah999x.github.io/portfolio",
   "name": "object-clump",
   "version": "1.0.0",
-  "description": "How to make a clump of objects that move towards the center point.",
+  "description": "elijah portfolo showreel",
   "keywords": [
-    "physics",
-    "cannon-es",
-    "use-cannon"
+    "portfolo",
+    "elijah",
+    "elijah999x"
   ],
   "main": "src/index.js",
   "dependencies": {
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
+    "gh-pages": "^5.0.0",
     "serve": "^14.2.0",
     "svg-url-loader": "^8.0.0",
     "typescript": "3.8.3"
@@ -54,6 +56,8 @@
   "scripts": {
     "rock": "react-scripts start",
     "start": "serve -s build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
