@@ -1,0 +1,61 @@
+@import './typed.scss';
+html, body {
+	scroll-behavior: smooth;
+  }
+.container {
+	width: 100%;
+	height: 100%;
+  }
+.main-back {
+	display: flex;
+  
+  }
+
+.main-page_1 {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  
+  }
+  
+  .main-page_2 {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  
+  }
+.texttypo{
+  font-size: 320%;
+  font-family: Neoteric;
+  position: absolute;
+  top: 50vh;
+  left:40%;
+  cursor: pointer;
+  
+}
+.rickly {
+	position: relative; /* Make sure it's positioned relative to allow absolute positioning inside */
+	height: 100%;
+	width: 100%;
+  }
+  
+.ricklyfont{
+	font-size: 3.2rem; /* Adjusted from 320% */
+	font-family: schwifty;
+	cursor: pointer;
+	color: aquamarine;
+	border-radius: 3px;
+	border: black;
+  }
+.time-of-day {
+	padding: 0 0 0 3px;
+	background-color: rgba(255, 251, 0, 0.297);
+	&::before { font-weight: 600; }
+	@include typed(
+		"simple", "fast", "modern",
+		2,
+		(caret-width: 2px, caret-space: 2px)
+	);
+}

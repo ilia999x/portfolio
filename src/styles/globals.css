@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Redline3D";
+    src: url("../../public/fonts/Redline3D-9YLW2.otf");
+  }
+  @font-face {
+    font-family: "VemanemPro";
+    src: url("../../public/fonts/VemanemPro-Regular.ttf");
+  }
+  @font-face {
+    font-family: "Neoteric";
+    src: url("../../public/fonts/Neoteric-32A8.ttf");
+  }
+
+  @font-face {
+    font-family: "CfNightOfTerrorPersonalRegular";
+    src: url("../../public/fonts/CfNightOfTerrorPersonalRegular.ttf");
+  }
+  @font-face {
+    font-family: "Meltdownmf";
+    src: url("../../public/fonts/Meltdownmf.ttf");
+  }
+  @font-face {
+    font-family: "Mrmonstar";
+    src: url("../../public/fonts/Mrmonstar.ttf");
+  }
+  @font-face {
+    font-family: "PsychopersonaluseRegular";
+    src: url("../../public/fonts/PsychopersonaluseRegular.otf");
+  }
+  @font-face {
+    font-family: "DripinkpersonaluseBlack";
+    src: url("../../public/fonts/DripinkpersonaluseBlack-x3XKK.otf");
+  }
+  @font-face {
+    font-family: "GacorPersonalUse";
+    src: url("../../public/fonts/GacorPersonalUse-6YnVD.otf");
+  }
+  @font-face {
+    font-family: "schwifty";
+    src: url("../../public/fonts/get_schwifty.ttf");
+  }
+  @font-face {
+    font-family: "getSchwifty";
+    src: url("../../public/fonts/Schwifty.ttf");
+  }
