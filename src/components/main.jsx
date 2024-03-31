@@ -113,7 +113,7 @@ export default function Mainpage() {
       </div>
       <div className="main-page_2">
   <RickModel />
-  <h3 className="ricklyfont">WELCOME TO THE WORLD OF POSSIBILITIES</h3>
+  <h3 className="ricklyfont">WELCOME TO THE WORLD OF POSSIBILITIES!</h3>
 
 </div>
 
