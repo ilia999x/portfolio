@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
 const nextConfig = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
     images: {
       unoptimized: true,
     },
     output: 'export',
+    reactStrictMode: true,
     webpack(config) {
       config.resolve.fallback = {
 
