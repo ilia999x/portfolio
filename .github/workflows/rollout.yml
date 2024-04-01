@@ -1,28 +1,28 @@
-name: Django API DEPLOY
+# name: Django API DEPLOY
 
-on:
-  workflow_call:
-  workflow_dispatch:
-  push:
-    branches: [deploy]
-  # pull_request:
-  #   branches: [deploy]
+# on:
+#   workflow_call:
+#   workflow_dispatch:
+#   push:
+#     branches: [deploy]
+#   # pull_request:
+#   #   branches: [deploy]
     
-jobs:
-  rollout:
-    runs-on: ubuntu-latest
-    env:
-      CLUSTER_NAME: wokenmeme8c
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Insall doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DO_API_TOKEN_KEY }}
-      - name: K8s cluster kubeconfig file with/ short-lived creds
-        run: |
-          doctl kubernetes cluster kubeconfig save --expiry-seconds 600 wokenmeme8c
-      - name: Run rollout on Deployment
-        run: |
-          kubectl rollout restart deployment/wokenmeme-api
+# jobs:
+#   rollout:
+#     runs-on: ubuntu-latest
+#     env:
+#       CLUSTER_NAME: wokenmeme8c
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+#       - name: Insall doctl
+#         uses: digitalocean/action-doctl@v2
+#         with:
+#           token: ${{ secrets.DO_API_TOKEN_KEY }}
+#       - name: K8s cluster kubeconfig file with/ short-lived creds
+#         run: |
+#           doctl kubernetes cluster kubeconfig save --expiry-seconds 600 wokenmeme8c
+#       - name: Run rollout on Deployment
+#         run: |
+#           kubectl rollout restart deployment/wokenmeme-api
