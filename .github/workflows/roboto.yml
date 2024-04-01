@@ -1,4 +1,4 @@
-name: Deploy Out Directory to gh-pages
+name: Deploy Out Directory to pages
 
 on:
   push:
@@ -27,26 +27,28 @@ jobs:
           cp -r out/. temp_out
         working-directory: ${{ github.workspace }}
       
-      # Checkout the gh-pages branch where you want to push the out directory
-      - name: Checkout gh-pages branch
-        run: git checkout gh-pages
-        continue-on-error: true  # Ignore if the branch doesn't exist yet
+      # Create and checkout the pages branch
+      - name: Create and checkout pages branch
+        run: |
+          git checkout -b pages
+          git push -u origin pages
+        continue-on-error: true  # Ignore if the branch already exists
       
-      # Remove existing files in the gh-pages branch (optional)
-      - name: Clean gh-pages branch
+      # Remove existing files in the pages branch (optional)
+      - name: Clean pages branch
         run: git rm -r .
         working-directory: ${{ github.workspace }}
         continue-on-error: true  # Ignore if there are no files to remove
       
-      # Copy the contents of the temporary out directory to the gh-pages branch
-      - name: Copy out to gh-pages branch
+      # Copy the contents of the temporary out directory to the pages branch
+      - name: Copy out to pages branch
         run: cp -r temp_out/. .
         working-directory: ${{ github.workspace }}
       
-      # Add, commit, and push changes to the gh-pages branch
+      # Add, commit, and push changes to the pages branch
       - name: Commit and push changes
         run: |
           git add .
-          git commit -m "Deploy out directory to gh-pages"
-          git push origin gh-pages
+          git commit -m "Deploy out directory to pages"
+          git push origin pages
         working-directory: ${{ github.workspace }}
