@@ -1495,6 +1495,16 @@
   dependencies:
     "@rive-app/canvas" "2.10.0"
 
+"@rive-app/webgl2-advanced@^2.12.1":
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/@rive-app/webgl2-advanced/-/webgl2-advanced-2.12.1.tgz#861bf25602b46019e50657894866a9b708c943e3"
+  integrity sha512-Bqog9nd2dusnYy6+keoaKkei9ECNL3GIU/vII+YsGs+ave5bVPEp0M2SPpjbkFBhpDCn7rgZAYdYlDpuhrIbdA==
+
+"@rive-app/webgl2@^2.12.1":
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/@rive-app/webgl2/-/webgl2-2.12.1.tgz#0b9510ac5805121a49befe893e01ca926f516a05"
+  integrity sha512-dXKMrT8Phu5fOcHSmfW5fyQGAu/ppsbikPJBS8+pD/p7gjbekjH4rL9PKnp4NxhxXLg8YQsGyIe66H6nQvtBZA==
+
 "@rive-app/webgl@2.10.0":
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/@rive-app/webgl/-/webgl-2.10.0.tgz#1b17d5e417ab7d959f76c3b42de8431dc7474d09"

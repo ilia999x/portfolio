@@ -34,6 +34,8 @@
     "@react-three/postprocessing": "^2.15.13",
     "@rive-app/canvas": "^2.10.0",
     "@rive-app/react-canvas": "^4.8.0",
+    "@rive-app/webgl2": "^2.12.1",
+    "@rive-app/webgl2-advanced": "^2.12.1",
     "@splinetool/loader": "^1.0.47",
     "@splinetool/r3f-spline": "^1.0.2",
     "@splinetool/react-spline": "^2.2.6",
