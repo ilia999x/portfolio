@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require('path')
 const nextConfig = {
+  basePath: "/portfolio",
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
