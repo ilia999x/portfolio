@@ -108,7 +108,7 @@ export function RickModelInside(props) {
           </Html>
       <PerspectiveCamera makeDefault fov={35} />
       {/* <axesHelper args={[5]} /> */}
-      <Environment path="/hdri/" files="dikhololo_night_1k.hdr" />
+      <Environment path="/portfolio/hdri/" files="dikhololo_night_1k.hdr" />
     </>
   )
 }
