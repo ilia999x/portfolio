@@ -14,7 +14,7 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next build && next export",
-    "deploy": "cross-env PUBLIC_URL=https://ilia999x.github.io/portfolio gh-pages -d build"
+    "deploy": "cross-env PUBLIC_URL=https://ilia999x.github.io/portfolio gh-pages -d out"
   },
   "browserslist": [
     ">0.2%",

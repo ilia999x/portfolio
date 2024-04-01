@@ -29,6 +29,6 @@
       "@media/*": ["./src/media/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.js", "**/*.jsx", ".next/types/**/*.js"],
+  "include": ["next-env.d.ts", "**/*.js", "**/*.jsx", ".next/types/**/*.js", "next.config.mjs"],
   "exclude": ["node_modules"]
 }
